@@ -401,4 +401,6 @@ class _HomePagetState extends State<HomePage> {
       ),
     );
   }
+
+  privateRoom() {}
 }

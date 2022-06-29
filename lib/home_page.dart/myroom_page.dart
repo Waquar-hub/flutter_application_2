@@ -11,14 +11,22 @@ class MyRoom extends StatefulWidget {
 }
 
 class MyRoomState extends State<MyRoom> {
+  late Widget Function() room = publicRoom;
   Color activeCardColour = Color(0xFF101E33);
   Color inactiveCardColour = Color(0xFF11328);
-  double _selectedValue = 20.0;
-  double _selectedValue2 = 20.0;
-  double _selectedValue3 = 20.0;
-  bool changeColor = false;
+  int _selectedValue = 20;
+  int _selectedValue2 = 20;
+  int _selectedValue3 = 20;
+  int _selectedValue4 = 20;
+  bool changeColor = true;
 
   late double deviceHeight, deviceWidth;
+  @override
+  void initState() {
+    super.initState();
+    room = publicRoom;
+  }
+
   @override
   Widget build(BuildContext context) {
     deviceHeight = MediaQuery.of(context).size.height;
@@ -52,6 +60,7 @@ class MyRoomState extends State<MyRoom> {
                   InkWell(
                     onTap: () {
                       setState(() {
+                        room = publicRoom as Widget Function();
                         changeColor = !changeColor;
                       });
                     },
@@ -60,7 +69,7 @@ class MyRoomState extends State<MyRoom> {
                         child: Text(
                           "Public",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: changeColor ? Colors.white : Colors.black,
                             fontSize: 28,
                           ),
                         ),
@@ -80,14 +89,15 @@ class MyRoomState extends State<MyRoom> {
                     onTap: () {
                       setState(() {
                         changeColor = !changeColor;
+                        room = privateRoom as Widget Function();
                       });
                     },
                     child: Container(
-                      child: const Center(
+                      child: Center(
                         child: Text(
                           "Private",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: changeColor ? Colors.black : Colors.white,
                             fontSize: 28,
                           ),
                         ),
@@ -105,310 +115,10 @@ class MyRoomState extends State<MyRoom> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: deviceHeight * 0.03,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: const [
-                            Text(
-                              "Pool Price",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              "Entry",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            "10 Tokens",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                            ),
-                          ),
-                          const Spacer(),
-                          Container(
-                            height: deviceWidth * 0.13,
-                            width: deviceWidth * 0.2,
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              semanticContainer: true,
-                              color: Colors.blueAccent.withOpacity(0.3),
-                              child: const Center(
-                                child: Text(
-                                  "12",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 25,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SliderTheme(
-                        data: SliderThemeData(
-                          thumbShape:
-                              RoundSliderThumbShape(enabledThumbRadius: 7),
-                        ),
-                        child: Slider(
-                          value: _selectedValue,
-                          min: 0.0,
-                          max: 100.0,
-                          activeColor: CupertinoColors.white,
-                          thumbColor: CupertinoColors.systemYellow,
-                          inactiveColor: CupertinoColors.systemGrey2,
-                          onChanged: (_value) {
-                            _selectedValue = _value;
-
-                            setState(() {});
-                          },
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Text("Wankhede Stadium", style: ktextstyle),
-                          Spacer(),
-                          Image(
-                              width: deviceWidth * 0.1,
-                              height: deviceWidth * 0.1,
-                              image: const NetworkImage(
-                                  "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1024px-Flag_of_India.svg.png"))
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Pool Price",
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              "Entry",
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            "10 Tokens",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 25,
-                            ),
-                          ),
-                          const Spacer(),
-                          Container(
-                            height: deviceWidth * 0.13,
-                            width: deviceWidth * 0.2,
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              semanticContainer: true,
-                              color: Colors.blue.withOpacity(0.3),
-                              child: const Center(
-                                child: Text(
-                                  "25",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 25,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SliderTheme(
-                        data: SliderThemeData(
-                          thumbShape:
-                              RoundSliderThumbShape(enabledThumbRadius: 7),
-                        ),
-                        child: Slider(
-                          value: _selectedValue2,
-                          min: 0.0,
-                          max: 100.0,
-                          activeColor: CupertinoColors.systemBlue,
-                          thumbColor: CupertinoColors.systemBlue,
-                          inactiveColor: CupertinoColors.systemGrey2,
-                          onChanged: (_value) {
-                            setState(() {
-                              _selectedValue2 = _value;
-                            });
-                          },
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Text("Wankhede Stadium", style: ktextstyle),
-                          Spacer(),
-                          Image(
-                              width: deviceWidth * 0.1,
-                              height: deviceWidth * 0.1,
-                              image: const NetworkImage(
-                                  "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1024px-Flag_of_India.svg.png"))
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Pool Price",
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              "Entry",
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            "10 Tokens",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 25,
-                            ),
-                          ),
-                          const Spacer(),
-                          Container(
-                            height: deviceWidth * 0.13,
-                            width: deviceWidth * 0.2,
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              semanticContainer: true,
-                              color: Colors.blue.withOpacity(0.3),
-                              child: const Center(
-                                child: Text(
-                                  "10",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 25,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SliderTheme(
-                        data: SliderThemeData(
-                          thumbShape:
-                              RoundSliderThumbShape(enabledThumbRadius: 7),
-                        ),
-                        child: Slider(
-                          value: _selectedValue3,
-                          min: 0.0,
-                          max: 100.0,
-                          activeColor: CupertinoColors.systemBlue,
-                          thumbColor: CupertinoColors.systemBlue,
-                          inactiveColor: CupertinoColors.systemGrey2,
-                          onChanged: (_value) {
-                            setState(() {
-                              _selectedValue3 = _value;
-                            });
-                          },
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Text("Wankhede Stadium", style: ktextstyle),
-                          Spacer(),
-                          Image(
-                              width: deviceWidth * 0.1,
-                              height: deviceWidth * 0.1,
-                              image: const NetworkImage(
-                                  "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1024px-Flag_of_India.svg.png"))
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              room(),
               SizedBox(
                 height: deviceHeight * 0.03,
               ),
@@ -427,6 +137,421 @@ class MyRoomState extends State<MyRoom> {
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget publicRoom() {
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: const [
+                      Text(
+                        "Pool Price",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        "Entry",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "10 Tokens",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                      ),
+                    ),
+                    const Spacer(),
+                    Container(
+                      height: deviceWidth * 0.13,
+                      width: deviceWidth * 0.2,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        semanticContainer: true,
+                        color: Colors.blueAccent.withOpacity(0.3),
+                        child: Center(
+                          child: Text(
+                            _selectedValue.toString(),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 25,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SliderTheme(
+                  data: SliderThemeData(
+                    thumbShape: RoundSliderThumbShape(enabledThumbRadius: 7),
+                  ),
+                  child: Slider(
+                    value: _selectedValue.toDouble(),
+                    min: 0.0,
+                    max: 100.0,
+                    activeColor: CupertinoColors.white,
+                    thumbColor: CupertinoColors.systemYellow,
+                    inactiveColor: CupertinoColors.systemGrey2,
+                    onChanged: (_value) {
+                      _selectedValue = _value.toInt();
+
+                      setState(() {});
+                    },
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text("Wankhede Stadium", style: ktextstyle),
+                    Spacer(),
+                    Image(
+                        width: deviceWidth * 0.1,
+                        height: deviceWidth * 0.1,
+                        image: const NetworkImage(
+                            "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1024px-Flag_of_India.svg.png"))
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+        SizedBox(
+          height: deviceHeight * 0.03,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blue),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Pool Price",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        "Entry",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "10 Tokens",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25,
+                      ),
+                    ),
+                    const Spacer(),
+                    Container(
+                      height: deviceWidth * 0.13,
+                      width: deviceWidth * 0.2,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        semanticContainer: true,
+                        color: Colors.blue.withOpacity(0.3),
+                        child: Center(
+                          child: Text(
+                            _selectedValue2.toString(),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 25,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SliderTheme(
+                  data: SliderThemeData(
+                    thumbShape: RoundSliderThumbShape(enabledThumbRadius: 7),
+                  ),
+                  child: Slider(
+                    value: _selectedValue2.toDouble(),
+                    min: 0.0,
+                    max: 100.0,
+                    activeColor: CupertinoColors.systemBlue,
+                    thumbColor: CupertinoColors.systemBlue,
+                    inactiveColor: CupertinoColors.systemGrey2,
+                    onChanged: (_value) {
+                      setState(() {
+                        _selectedValue2 = _value.toInt();
+                      });
+                    },
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Wankhede Stadium",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    Spacer(),
+                    Image(
+                        width: deviceWidth * 0.1,
+                        height: deviceWidth * 0.1,
+                        image: const NetworkImage(
+                            "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1024px-Flag_of_India.svg.png"))
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+        SizedBox(
+          height: deviceHeight * 0.03,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blue),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Pool Price",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        "Entry",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "10 Tokens",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25,
+                      ),
+                    ),
+                    const Spacer(),
+                    Container(
+                      height: deviceWidth * 0.13,
+                      width: deviceWidth * 0.2,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        semanticContainer: true,
+                        color: Colors.blue.withOpacity(0.3),
+                        child: Center(
+                          child: Text(
+                            _selectedValue3.toString(),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 25,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SliderTheme(
+                  data: SliderThemeData(
+                    thumbShape: RoundSliderThumbShape(enabledThumbRadius: 7),
+                  ),
+                  child: Slider(
+                    value: _selectedValue3.toDouble(),
+                    min: 0.0,
+                    max: 100.0,
+                    activeColor: CupertinoColors.systemBlue,
+                    thumbColor: CupertinoColors.systemBlue,
+                    inactiveColor: CupertinoColors.systemGrey2,
+                    onChanged: (_value) {
+                      setState(() {
+                        _selectedValue3 = _value.toInt();
+                      });
+                    },
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Wankhede Stadium",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    Spacer(),
+                    Image(
+                        width: deviceWidth * 0.1,
+                        height: deviceWidth * 0.1,
+                        image: const NetworkImage(
+                            "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1024px-Flag_of_India.svg.png"))
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget privateRoom() {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  Text(
+                    "Pool Price",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    "Entry",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                const Text(
+                  "500 Tokens",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 25,
+                  ),
+                ),
+                const Spacer(),
+                Container(
+                  height: deviceWidth * 0.13,
+                  width: deviceWidth * 0.2,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    semanticContainer: true,
+                    color: Colors.blue.withOpacity(0.3),
+                    child: Center(
+                      child: Text(
+                        _selectedValue4.toString(),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SliderTheme(
+              data: SliderThemeData(
+                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 7),
+              ),
+              child: Slider(
+                value: _selectedValue4.toDouble(),
+                min: 0.0,
+                max: 100.0,
+                activeColor: CupertinoColors.systemBlue,
+                thumbColor: CupertinoColors.systemBlue,
+                inactiveColor: CupertinoColors.systemGrey2,
+                onChanged: (_value) {
+                  setState(() {
+                    _selectedValue4 = _value.toInt();
+                  });
+                },
+              ),
+            ),
+            Row(
+              children: [
+                Text("Wankhede Stadium", style: ktextstyle),
+                Spacer(),
+                Image(
+                    width: deviceWidth * 0.1,
+                    height: deviceWidth * 0.1,
+                    image: const NetworkImage(
+                        "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1024px-Flag_of_India.svg.png"))
+              ],
+            )
+          ],
         ),
       ),
     );
