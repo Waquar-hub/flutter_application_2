@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_2/home_page.dart/home_page.dart';
 
 import '../constants.dart';
@@ -84,23 +82,6 @@ class _UpcommingMatchesState extends State<UpcommingMatches> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                children: const [
-                  Text(
-                    "My Room",
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  ),
-                  Spacer(),
-                  Text("View All"),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 15,
-                  )
-                ],
-              ),
               const SizedBox(
                 height: 20,
               ),
@@ -120,7 +101,10 @@ class _UpcommingMatchesState extends State<UpcommingMatches> {
                         children: [
                           Text("OPPO IPL", style: ktextstyle),
                           Spacer(),
-                          Text("Public", style: ktextstyle),
+                          Icon(
+                            Icons.notifications_active_outlined,
+                            color: Colors.white,
+                          )
                         ],
                       ),
                       const Divider(
@@ -169,20 +153,66 @@ class _UpcommingMatchesState extends State<UpcommingMatches> {
                                   "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1024px-Flag_of_India.svg.png"))
                         ],
                       ),
-                      SizedBox(
-                        height: deviceheight * 0.03,
-                      ),
-                      Container(
-                        // height: deviceheight * 0.20,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blue),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: upcommingMatches(),
-                      ),
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                // height: deviceheight * 0.20,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: upcommingMatches(
+                    text1: "Kolkata Knight Riders",
+                    text2: " Rajasthan Royals ",
+                    text3: "KKR",
+                    text4: "RR",
+                    image1:
+                        'https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/800px-Kolkata_Knight_Riders_Logo.svg.png',
+                    image2:
+                        'https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/323px-Rajasthan_Royals_Logo.svg.png'),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                // height: deviceheight * 0.20,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: upcommingMatches(
+                    text1: " Royal Challengers Bangalore",
+                    text2: " Sunrisers Hyderabad ",
+                    text3: "RCB",
+                    text4: "SRH",
+                    image1:
+                        'https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/Royal_Challengers_Bangalore_2020.svg/800px-Royal_Challengers_Bangalore_2020.svg.png',
+                    image2:
+                        'https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/390px-Sunrisers_Hyderabad.svg.png'),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                // height: deviceheight * 0.20,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: upcommingMatches(
+                    text1: "Gujarat Titans",
+                    text2: " Punjab Kings",
+                    text3: "GT",
+                    text4: "KXIP",
+                    image1:
+                        'https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/368px-Gujarat_Titans_Logo.svg.png',
+                    image2:
+                        'https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/800px-Punjab_Kings_Logo.svg.png'),
               ),
             ],
           ),
@@ -191,7 +221,8 @@ class _UpcommingMatchesState extends State<UpcommingMatches> {
     );
   }
 
-  Widget upcommingMatches() {
+  Widget upcommingMatches(
+      {required String text1, text2, text3, text4, image1, image2}) {
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: deviceWidth * 0.03, vertical: deviceheight * 0.01),
@@ -210,10 +241,10 @@ class _UpcommingMatchesState extends State<UpcommingMatches> {
             color: Colors.black,
           ),
           Row(
-            children: const [
-              Text(" Kolkata Knight Riders"),
+            children: [
+              Text(text1),
               Spacer(),
-              Text(" Rajasthan Royals "),
+              Text(text2),
             ],
           ),
           Padding(
@@ -224,24 +255,22 @@ class _UpcommingMatchesState extends State<UpcommingMatches> {
                 Image(
                   height: deviceWidth * 0.1,
                   width: deviceWidth * 0.1,
-                  image: NetworkImage(
-                      'https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/800px-Kolkata_Knight_Riders_Logo.svg.png'),
+                  image: NetworkImage(image1),
                 ),
                 Text(
-                  "KKR",
+                  text3,
                   style: TextStyle(fontSize: deviceWidth * 0.07),
                 ),
                 Spacer(),
                 Image(
                   height: deviceWidth * 0.1,
                   width: deviceWidth * 0.1,
-                  image: const NetworkImage(
-                      'https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/323px-Rajasthan_Royals_Logo.svg.png'),
+                  image: NetworkImage(image2),
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: deviceWidth * 0.01),
                   child: Text(
-                    "RR",
+                    text4,
                     style: TextStyle(fontSize: deviceWidth * 0.07),
                   ),
                 ),

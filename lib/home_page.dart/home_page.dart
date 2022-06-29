@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/home_page.dart/more.dart';
+import 'package:flutter_application_2/home_page.dart/myroom_page.dart';
+import 'package:flutter_application_2/home_page.dart/tournment.dart';
 import 'package:flutter_application_2/home_page.dart/upcomming_matches.dart';
 
 import '../constants.dart';
 import '../screens/Home.dart';
-import 'my_room.dart';
 import 'wallet.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,8 +13,6 @@ class HomePage extends StatefulWidget {
 
   @override
   State<HomePage> createState() => _HomePagetState();
-
-  static upcommingMatches() {}
 }
 
 class _HomePagetState extends State<HomePage> {
@@ -32,6 +31,7 @@ class _HomePagetState extends State<HomePage> {
     deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Fanwelt"),
         leading: const Padding(
           padding: EdgeInsets.all(8.0),
@@ -99,19 +99,33 @@ class _HomePagetState extends State<HomePage> {
                 height: 20,
               ),
               Row(
-                children: const [
+                children: [
                   Text(
                     "My Room",
                     style: TextStyle(color: Colors.black, fontSize: 20),
                   ),
                   Spacer(),
-                  Text("View All"),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 15,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyRoom()),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          "View All",
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: 15,
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -189,30 +203,48 @@ class _HomePagetState extends State<HomePage> {
               const SizedBox(
                 height: 20,
               ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => UpcommingMatches()),
-                  );
-                },
-                child: Row(
-                  children: [
-                    Text(
-                      "Upcomming Matches",
-                      style: TextStyle(color: Colors.black, fontSize: 20),
+              Row(
+                children: [
+                  const Text(
+                    "Upcomming Matches",
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                  const Spacer(),
+
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => UpcommingMatches()),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          "View All",
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: 15,
+                        )
+                      ],
                     ),
-                    Spacer(),
-                    Text("View All"),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      size: 15,
-                    )
-                  ],
-                ),
+                  )
+                  // Text(
+                  //   "View All",
+                  // ),
+                  // SizedBox(
+                  //   width: 5,
+                  // ),
+                  // Icon(
+                  //   Icons.arrow_forward_ios,
+                  //   size: 15,
+                  // )
+                ],
               ),
               SizedBox(
                 height: deviceheight * 0.03,
@@ -235,13 +267,25 @@ class _HomePagetState extends State<HomePage> {
                     styletext: const TextStyle(fontSize: 20),
                   ),
                   const Spacer(),
-                  _titleWidget(title: "View All"),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 15,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Tournament()),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        _titleWidget(title: "View All"),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 15,
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),

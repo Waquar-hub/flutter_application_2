@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../home_page.dart/bottom_myRoom.dart';
 import '../home_page.dart/home_page.dart';
 import '../home_page.dart/more.dart';
-import '../home_page.dart/my_room.dart';
 import '../home_page.dart/wallet.dart';
 
 class Home extends StatefulWidget {
@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
   int currentPage = 0;
   final List<Widget> pages = [
     HomePage(),
-    MyRoom(),
+    BottomMyRoom(),
     Wallet(),
     MorePage(),
   ];
